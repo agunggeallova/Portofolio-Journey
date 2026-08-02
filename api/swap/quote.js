@@ -1,5 +1,6 @@
 export default async function handler(request, response) {
   const { chainId = '1', sellToken, buyToken, sellAmount, taker } = request.query;
+  if (!['1', '137', '56', '42161', '8453'].includes(String(chainId))) return response.status(400).json({ error: 'Network belum didukung oleh CikSwap.' });
   if (!sellToken || !buyToken || !sellAmount || !taker) return response.status(400).json({ error: 'Parameter quote belum lengkap.' });
   if (!process.env.ZEROX_API_KEY) return response.status(503).json({ error: 'ZEROX_API_KEY belum diatur pada Vercel.' });
   try {
