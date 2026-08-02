@@ -4,7 +4,8 @@ export default async function handler(request, response) {
   if (!sellToken || !buyToken || !sellAmount || !taker) return response.status(400).json({ error: 'Parameter quote belum lengkap.' });
   if (!process.env.ZEROX_API_KEY) return response.status(503).json({ error: 'ZEROX_API_KEY belum diatur pada Vercel.' });
   try {
-    const qs = new URLSearchParams({ chainId, sellToken, buyToken, sellAmount, taker });
+    // 0x validates the native-token sentinel strictly; normalize it and all token addresses.
+    const qs = new URLSearchParams({ chainId, sellToken: sellToken.toLowerCase(), buyToken: buyToken.toLowerCase(), sellAmount, taker });
     // Permit2 is used on Ethereum; 0x Allowance Holder supports the other EVM routes.
     const route = String(chainId) === '1' ? 'permit2' : 'allowance-holder';
     const api = await fetch(`https://api.0x.org/swap/${route}/quote?${qs}`, { headers: { '0x-api-key': process.env.ZEROX_API_KEY, '0x-version': 'v2' } });
