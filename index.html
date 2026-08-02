@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bagas Ady Santoso — Web3 Community Growth, Strategy & Creative." />
+  <title>Bagas Ady Santoso — Web3 Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#080a0d; --paper:#f0f3ef; --muted:#9da6a0; --lime:#c6ff44; --line:rgba(240,243,239,.14); --serif:"Space Grotesk",sans-serif; --sans:"Manrope",sans-serif; --mono:"DM Mono",monospace; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--paper); background:var(--ink); font-family:var(--sans); overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+    .chain-canvas { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:-3; opacity:.72; }
+    .grid { position:fixed; inset:0; pointer-events:none; z-index:-2; background-image:linear-gradient(rgba(198,255,68,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(198,255,68,.035) 1px,transparent 1px); background-size:72px 72px; mask-image:linear-gradient(to bottom,black,transparent 72%); }
+    .grain { position:fixed; inset:0; pointer-events:none; z-index:20; opacity:.05; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.85'/%3E%3C/svg%3E"); }
+    .cursor-glow { width:360px; height:360px; border-radius:50%; pointer-events:none; position:fixed; z-index:-1; transform:translate(-50%,-50%); background:radial-gradient(circle,rgba(198,255,68,.13),transparent 65%); filter:blur(3px); }
+    .shell { width:min(1440px,100%); margin:auto; padding:0 42px; }
+    .eyebrow { color:var(--lime); font:500 11px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase; display:flex; align-items:center; gap:9px; }
+    .eyebrow::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--lime); box-shadow:0 0 12px var(--lime); }
+    .nav { height:82px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:30; transition:height .35s cubic-bezier(.22,1,.36,1),background .35s,border-color .35s,box-shadow .35s; }
+    .nav.scrolled { height:66px; background:rgba(8,10,13,.78); backdrop-filter:blur(18px) saturate(145%); -webkit-backdrop-filter:blur(18px) saturate(145%); border-color:rgba(198,255,68,.27); box-shadow:0 12px 34px rgba(0,0,0,.22); }
+    .logo { font:700 19px var(--serif); letter-spacing:-.07em; }
+    .logo span { color:var(--lime); }
+    .navlinks { display:flex; align-items:center; gap:30px; color:#c3c9c5; font-size:12px; font-weight:700; }
+    .navlinks a { transition:color .2s; } .navlinks a:hover { color:var(--lime); }
+    .availability { border:1px solid rgba(198,255,68,.45); padding:10px 13px; color:var(--lime); font:10px var(--mono); letter-spacing:.05em; }
+    .availability i { width:6px; height:6px; border-radius:50%; display:inline-block; background:var(--lime); margin-right:7px; box-shadow:0 0 9px var(--lime); animation:pulse 1.8s infinite; }
+    .hero { min-height:calc(100svh - 82px); padding:30px 0 46px; display:grid; grid-template-columns:1fr 410px; position:relative; }
+    .hero::after { content:""; position:absolute; right:-13%; top:4%; width:650px; height:650px; background:radial-gradient(circle,rgba(198,255,68,.14),rgba(28,61,39,.08) 35%,transparent 68%); border-radius:50%; z-index:-1; animation:breathe 6s ease-in-out infinite; }
+    .hero-copy { display:flex; flex-direction:column; align-items:flex-start; }
+    h1 { font:700 clamp(4.1rem,9.1vw,9.6rem)/.83 var(--serif); letter-spacing:-.09em; margin:42px 0 34px; max-width:900px; }
+    h1 em { color:var(--lime); font-style:normal; display:block; }
+    .hero-bottom { display:flex; align-items:end; justify-content:space-between; width:100%; margin-top:auto; padding-right:44px; }
+    .intro { max-width:360px; font-size:15px; line-height:1.75; color:#b9c1bc; }
+    .intro strong { color:var(--paper); }
+    .round-link { display:grid; place-items:center; width:106px; height:106px; border:1px solid var(--line); border-radius:50%; font:11px var(--mono); transition:.35s; }
+    .round-link:hover { background:var(--lime); color:var(--ink); border-color:var(--lime); transform:rotate(-13deg); }
+    .portrait-wrap { align-self:end; position:relative; height:520px; margin-right:22px; }
+    .portrait-wrap::before { content:""; position:absolute; width:100%; height:100%; left:16px; top:16px; border:1px solid rgba(198,255,68,.55); z-index:-1; }
+    .portrait { width:372px; height:500px; object-fit:cover; object-position:center 46%; filter:grayscale(100%) contrast(1.1); display:block; }
+    .portrait-wrap:hover .portrait { filter:grayscale(0%) contrast(1.03); transition:filter .5s; }
+    .portrait-label { position:absolute; bottom:19px; left:-38px; background:var(--lime); color:var(--ink); padding:12px 14px; font:10px var(--mono); letter-spacing:.05em; }
+    .coordinates { position:absolute; bottom:-6px; right:-5px; font:10px var(--mono); color:var(--muted); transform:rotate(-90deg) translateX(100%); transform-origin:right top; }
+    .network-bar { grid-column:1/-1; height:43px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; color:#84908a; font:10px var(--mono); letter-spacing:.06em; }
+    .network-bar b { color:var(--paper); font-weight:400; }.block { color:var(--lime); }.block::before { content:"◈"; font-size:14px; vertical-align:-1px; padding-right:7px; }
+    .orbital { position:absolute; right:-102px; top:44px; width:590px; height:590px; border:1px solid rgba(198,255,68,.18); border-radius:50%; z-index:-1; animation:spin 28s linear infinite; }.orbital::before,.orbital::after { content:""; position:absolute; width:12px; height:12px; border-radius:50%; background:var(--lime); box-shadow:0 0 20px var(--lime); }.orbital::before{left:31px;top:105px}.orbital::after{right:88px;bottom:44px;width:6px;height:6px}.orbital span { position:absolute; border:1px dashed rgba(198,255,68,.25); border-radius:50%; inset:70px; }
+    .identity { position:absolute; right:16px; top:78px; color:var(--lime); font:10px var(--mono); letter-spacing:.1em; writing-mode:vertical-rl; }
+    .ticker { border-top:1px solid var(--line); border-bottom:1px solid var(--line); overflow:hidden; display:flex; white-space:nowrap; }
+    .ticker-inner { font:600 13px var(--mono); color:#c4ccc7; letter-spacing:.05em; padding:17px 0; animation:marquee 23s linear infinite; }
+    .ticker b { color:var(--lime); margin:0 28px; }
+    section { padding:145px 0; }
+    .section-top { display:grid; grid-template-columns:32% 1fr; margin-bottom:60px; }
+    h2 { font:600 clamp(2.4rem,4.8vw,5.2rem)/.9 var(--serif); letter-spacing:-.075em; max-width:830px; margin:0; }
+    h2 span { color:var(--lime); }
+    .about { display:grid; grid-template-columns:32% 1fr; }
+    .about-copy { max-width:720px; }
+    .about-copy p { font:500 clamp(1.5rem,2.5vw,2.75rem)/1.3 var(--serif); letter-spacing:-.055em; margin:0; }
+    .about-copy p + p { color:#777f7b; margin-top:23px; }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; border:1px solid var(--line); background:var(--line); margin-top:70px; }
+    .stat { background:var(--ink); padding:27px 25px; }
+    .stat strong { display:block; font:600 clamp(2rem,3vw,3.5rem)/1 var(--serif); letter-spacing:-.08em; color:var(--lime); margin-bottom:12px; }
+    .stat span { color:#9fa8a2; font:10px var(--mono); text-transform:uppercase; letter-spacing:.08em; }
+    .services { background:#e9ede7; color:#101410; }
+    .services .eyebrow { color:#477218; } .services .eyebrow::before { background:#477218; box-shadow:none; }
+    .services h2 span { color:#477218; }
+    .service-list { border-top:1px solid rgba(16,20,16,.22); }
+    .service { display:grid; grid-template-columns:90px 1fr auto; gap:28px; align-items:center; padding:30px 0; border-bottom:1px solid rgba(16,20,16,.22); transition:padding .3s, background .3s; }
+    .service:hover { padding-left:20px; padding-right:20px; background:#d8ff92; }
+    .service-num { color:#72806d; font:11px var(--mono); } .service h3 { margin:0; font:600 clamp(1.55rem,3vw,3.15rem)/1 var(--serif); letter-spacing:-.065em; }
+    .service p { max-width:260px; margin:0; color:#586057; font-size:12px; line-height:1.6; }
+    .service-arrow { font-size:25px; transform:rotate(-45deg); transition:transform .3s; }.service:hover .service-arrow { transform:rotate(0deg); }
+    .experience { padding-bottom:90px; }
+    .timeline { margin-left:32%; border-top:1px solid var(--line); }
+    .role { display:grid; grid-template-columns:135px 1fr auto; gap:24px; padding:28px 0; border-bottom:1px solid var(--line); align-items:start; transition:padding .25s; }
+    .role:hover { padding-left:16px; background:linear-gradient(90deg,rgba(198,255,68,.07),transparent); }
+    .role-date { font:10px/1.5 var(--mono); color:var(--muted); }
+    .role h3 { margin:0; font:600 19px var(--serif); letter-spacing:-.04em; }.role h3 span { color:var(--lime); }
+    .role small { margin-top:5px; display:block; color:#78817c; font-size:12px; }.role-tag { border:1px solid var(--line); color:#bcc4bf; padding:7px 9px; font:9px var(--mono); text-transform:uppercase; }
+    .skills { padding-top:70px; }
+    .journal-preview { padding:90px 0 110px; }.journal-heading { display:flex;align-items:end;justify-content:space-between;margin-bottom:32px; }.journal-heading h2{font-size:clamp(2.8rem,5vw,5rem);max-width:680px}.journal-cta{border:1px solid var(--line);padding:13px 16px;color:var(--lime);font:10px var(--mono);letter-spacing:.07em;white-space:nowrap;transition:.25s}.journal-cta:hover{background:var(--lime);color:var(--ink)}.journal-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:1px;background:var(--line);border:1px solid var(--line)}.journal-card{min-height:245px;background:#0c100d;padding:25px;display:flex;flex-direction:column;transition:.3s}.journal-card:hover{background:#172015}.journal-card:first-child{grid-row:span 2}.journal-card .journal-meta{font:10px var(--mono);letter-spacing:.08em;color:var(--lime)}.journal-card h3{font:600 clamp(1.3rem,2.1vw,2.1rem)/1.06 var(--serif);letter-spacing:-.06em;margin:18px 0}.journal-card p{margin:0;color:#87938a;font-size:12px;line-height:1.7}.journal-card .journal-read{margin-top:auto;color:var(--paper);font:10px var(--mono);letter-spacing:.08em}.journal-card .journal-read span{color:var(--lime);font-size:16px}.journal-empty{grid-column:1/-1;text-align:center;padding:70px 20px;background:#0c100d;color:var(--muted);font:11px var(--mono)}
+    .skillgrid { display:grid; grid-template-columns:repeat(4,1fr); border-left:1px solid var(--line); }
+    .skill { min-height:190px; padding:22px; border:1px solid var(--line); border-left:0; display:flex; flex-direction:column; justify-content:space-between; transition:background .3s; }
+    .skill:hover { background:#172015; }.skill b { font:600 20px var(--serif); letter-spacing:-.05em; }.skill span { color:#8d9790; font:10px var(--mono); }
+    .cta { padding:126px 0 34px; min-height:90vh; display:flex; flex-direction:column; justify-content:space-between; background:#1b2c18; position:relative; overflow:hidden; }
+    .cta::before { content:"✦"; position:absolute; color:var(--lime); font-size:clamp(20rem,50vw,50rem); line-height:1; right:-12vw; top:-18vw; opacity:.08; }
+    .cta h2 { font-size:clamp(3.3rem,8vw,8.5rem); max-width:1000px; position:relative; }.cta h2 a { color:var(--lime); border-bottom:5px solid var(--lime); transition:.25s; }.cta h2 a:hover { color:white; border-color:white; }
+    .footerline { display:flex; justify-content:space-between; padding-top:30px; border-top:1px solid rgba(240,243,239,.25); font:10px var(--mono); color:#aeb8ac; }.socials { display:flex; gap:25px; }.socials a:hover { color:var(--lime); }
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1); }.reveal.visible { opacity:1; transform:none; }
+    .split-text { overflow:visible; }.split-text .word { display:inline-block; opacity:0; filter:blur(9px); transform:translate3d(0,115%,0) rotate(2deg); will-change:transform,opacity,filter; transition:transform .95s cubic-bezier(.16,1,.3,1),opacity .65s ease,filter .85s ease; }.split-text.visible .word { opacity:1; filter:blur(0); transform:translate3d(0,0,0) rotate(0); }.split-text .word + .word { margin-left:.25em; }
+    .scroll-shift { will-change:transform; }
+    .protocol { background:linear-gradient(135deg,#0b120b 0%,#162511 65%,#0b0d0d 100%); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }.protocol-inner { display:grid; grid-template-columns:32% 1fr; padding:78px 0; }.protocol-copy{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}.chain-card{background:#0d110e;padding:25px 20px;min-height:180px;display:flex;flex-direction:column;justify-content:space-between}.chain-card i{color:var(--lime);font:18px var(--mono);font-style:normal}.chain-card b{font:600 17px var(--serif);letter-spacing:-.05em}.chain-card span{font:10px/1.5 var(--mono);color:#8b978c}.hash{font:10px var(--mono);color:#7c8a7b;letter-spacing:.08em;margin-top:28px}.hash strong{color:var(--lime);font-weight:400}
+    @keyframes pulse { 50% { opacity:.25; } } @keyframes breathe { 50% { transform:scale(1.12); opacity:.6; } } @keyframes marquee { to { transform:translateX(-50%); } } @keyframes spin { to { transform:rotate(360deg); } }
+    @media (max-width:760px) { .shell{padding:0 20px}.nav{height:68px}.navlinks{gap:0}.navlinks a:not(.availability){display:none}.availability{font-size:0;padding:11px}.availability i{margin:0;width:7px;height:7px}.hero{display:block;padding-top:0;min-height:auto}.hero h1{font-size:clamp(3.35rem,15vw,4.1rem);margin:31px 0}.hero-bottom{padding:0;margin:35px 0 54px;gap:20px}.intro{font-size:14px}.round-link{flex:0 0 92px;width:92px;height:92px;font-size:10px}.portrait-wrap{height:auto;margin:0 14px 0 0}.portrait{width:100%;height:clamp(340px,105vw,420px)}.section-top,.about,.protocol-inner{display:block}.section-top{margin-bottom:36px}.section-top .eyebrow{margin-bottom:25px}section{padding:85px 0}.stats{margin-top:40px}.stat{padding:20px 12px}.stat strong{font-size:2rem}.stat span{font-size:8px}.service{grid-template-columns:40px 1fr auto;gap:10px}.service p{display:none}.timeline{margin-left:0}.role{grid-template-columns:82px 1fr;gap:13px}.role-tag{display:none}.skillgrid{grid-template-columns:repeat(2,1fr)}.skill{min-height:130px}.journal-preview{padding:75px 0}.journal-heading{align-items:flex-start;gap:25px;flex-direction:column}.journal-grid{grid-template-columns:1fr}.journal-card:first-child{grid-row:auto}.cta{min-height:75vh;padding-top:85px}.footerline{gap:20px;flex-direction:column}.coordinates,.identity,.orbital{display:none}.network-bar span:nth-child(2){display:none}.protocol-copy{margin-top:28px;grid-template-columns:1fr}.chain-card{min-height:120px} }
+    @media (max-width:390px) { .shell{padding:0 15px}.logo{font-size:17px}.hero-bottom{align-items:flex-start;flex-direction:column}.round-link{width:76px;height:76px;flex-basis:76px}.network-bar{font-size:8px}.network-bar span:last-child{display:none}.stats{grid-template-columns:1fr}.stat{padding:16px}.skillgrid{grid-template-columns:1fr 1fr}.skill{min-height:112px;padding:15px}.skill b{font-size:17px}.role{grid-template-columns:70px 1fr}.role-date{font-size:8px}.cta h2{font-size:3rem}.journal-cta{width:100%;text-align:center} }
+  </style>
+</head>
+<body>
+  <canvas class="chain-canvas" aria-hidden="true"></canvas><div class="grid" aria-hidden="true"></div><div class="grain"></div><div class="cursor-glow"></div>
+  <main>
+    <div class="shell"><nav class="nav"><a class="logo" href="#top">BAGAS<span>/</span>ADY</a><div class="navlinks"><a href="#about">Tentang</a><a href="#experience">Pengalaman</a><a href="blog.html">Journal</a><a href="market.html">Market</a><a href="#contact">Kontak</a><a class="availability" href="mailto:hello@bagasady.com"><i></i>TERBUKA UNTUK KOLABORASI</a></div></nav></div>
+    <div class="shell" id="top"><section class="hero"><div class="network-bar"><span class="block">ETHEREUM MAINNET</span><span>BLOCK <b id="block-number">23,118,824</b> &nbsp; / &nbsp; GAS 0.8 GWEI</span><span>STATUS: <b style="color:var(--lime)">SYNCED</b></span></div><div class="orbital"><span></span></div><div class="identity">0xBAGAS...WEB3</div><div class="hero-copy"><div class="eyebrow">WEB3 COMMUNITY &amp; CREATIVE</div><h1>BUILDING<br>THE <em>NEXT WEB.</em></h1><div class="hero-bottom"><p class="intro">Saya <strong>Bagas Ady Santoso</strong> — penggerak komunitas, kreator, dan Web3 native yang mengubah ide terdesentralisasi menjadi momentum nyata.</p><a class="round-link" href="#about">LEBIH<br>TENTANG SAYA ↓</a></div></div><div class="portrait-wrap"><img class="portrait" src="bagas-ady-santoso.png" alt="Bagas Ady Santoso"><div class="portrait-label">BASED IN INDONESIA</div><span class="coordinates">07°48′ S / 110°22′ E</span></div></section></div>
+    <div class="ticker"><div class="ticker-inner">COMMUNITY GROWTH <b>✦</b> WEB3 STRATEGY <b>✦</b> CREATIVE DIRECTION <b>✦</b> BLOCKCHAIN EDUCATION <b>✦</b> COMMUNITY GROWTH <b>✦</b> WEB3 STRATEGY <b>✦</b> CREATIVE DIRECTION <b>✦</b> BLOCKCHAIN EDUCATION <b>✦</b></div></div>
+    <div class="shell"><section id="about"><div class="section-top reveal"><div class="eyebrow">01 / PROFIL</div><h2>Bergerak di titik temu <span>komunitas,</span> teknologi, dan kultur.</h2></div><div class="about reveal"><div></div><div class="about-copy"><p>Membantu produk Web3 menemukan suara, membangun kepercayaan, dan bertumbuh bersama komunitasnya.</p><p>Dari strategi komunitas hingga desain dan edukasi, saya menikmati proses membuat teknologi baru terasa lebih manusiawi dan mudah diakses.</p><div class="stats"><div class="stat"><strong>4+</strong><span>Tahun di Web3</span></div><div class="stat"><strong>8</strong><span>Proyek &amp; Protokol</span></div><div class="stat"><strong>∞</strong><span>Rasa ingin tahu</span></div></div></div></div></section></div>
+    <section class="protocol"><div class="shell"><div class="protocol-inner reveal"><div><div class="eyebrow">LIVE / CONTRIBUTION LAYER</div><div class="hash">WALLET FINGERPRINT<br><strong>0xBA6A...A9D5</strong></div></div><div class="protocol-copy"><div class="chain-card"><i>◌ 01</i><b>Discover</b><span>MEMAHAMI PROTOKOL<br>&amp; PENGGUNA</span></div><div class="chain-card"><i>◇ 02</i><b>Connect</b><span>MEMBANGUN RITME<br>KOMUNITAS</span></div><div class="chain-card"><i>✦ 03</i><b>Amplify</b><span>MENGUBAH ENERGI<br>MENJADI PERTUMBUHAN</span></div></div></div></div></section>
+    <section class="services"><div class="shell"><div class="section-top reveal"><div class="eyebrow">02 / KEAHLIAN</div><h2>Untuk ide yang pantas <span>bertumbuh.</span></h2></div><div class="service-list reveal"><div class="service"><span class="service-num">01</span><h3>Community Growth</h3><p>Membangun komunitas yang aktif, loyal, dan berdaya.</p><span class="service-arrow">↗</span></div><div class="service"><span class="service-num">02</span><h3>Web3 Education</h3><p>Menerjemahkan konsep kompleks menjadi cerita yang relevan.</p><span class="service-arrow">↗</span></div><div class="service"><span class="service-num">03</span><h3>Content &amp; Brand</h3><p>Menciptakan identitas dan konten yang punya daya ingat.</p><span class="service-arrow">↗</span></div><div class="service"><span class="service-num">04</span><h3>UI/UX Perspective</h3><p>Mengutamakan pengalaman yang jelas dan intuitif.</p><span class="service-arrow">↗</span></div></div></div></section>
+    <div class="shell"><section class="experience" id="experience"><div class="section-top reveal"><div class="eyebrow">03 / JEJAK LANGKAH</div><h2>Beberapa ruang yang pernah <span>saya tumbuhkan.</span></h2></div><div class="timeline reveal"><article class="role"><div class="role-date">FEB 2025<br>SEKARANG</div><div><h3>PraSaga Foundation <span>—</span> Community Growth</h3><small>Mendorong pertumbuhan dan keterlibatan komunitas untuk ekosistem blockchain.</small></div><div class="role-tag">CURRENT</div></article><article class="role"><div class="role-date">AUG 2024<br>FEB 2025</div><div><h3>Safle <span>—</span> Moderator</h3><small>Menjaga percakapan komunitas tetap sehat, aktif, dan informatif.</small></div><div class="role-tag">WEB3</div></article><article class="role"><div class="role-date">APR 2023<br>FEB 2025</div><div><h3>Krystal <span>—</span> Advocate</h3><small>Menghubungkan produk DeFi dengan komunitas dan pengguna baru.</small></div><div class="role-tag">DEFI</div></article><article class="role"><div class="role-date">JAN 2023<br>FEB 2025</div><div><h3>Cryptoiz Research <span>—</span> Author</h3><small>Menulis insight dan edukasi seputar lanskap kripto.</small></div><div class="role-tag">CONTENT</div></article><article class="role"><div class="role-date">2021 — 2023</div><div><h3>TALAXEUM, Larix &amp; Channels <span>—</span> Community Manager</h3><small>Pengalaman awal mengelola dan mengembangkan berbagai komunitas Web3.</small></div><div class="role-tag">ARCHIVE</div></article></div></section><section class="skills"><div class="section-top reveal"><div class="eyebrow">04 / TOOLKIT</div><h2>Bekal untuk bergerak <span>lebih jauh.</span></h2></div><div class="skillgrid reveal"><div class="skill"><b>Discord</b><span>COMMUNITY OPS</span></div><div class="skill"><b>Telegram</b><span>COMMUNITY OPS</span></div><div class="skill"><b>Figma</b><span>PRODUCT &amp; DESIGN</span></div><div class="skill"><b>Notion</b><span>STRATEGY &amp; DOCS</span></div><div class="skill"><b>Writing</b><span>EDUCATION &amp; CONTENT</span></div><div class="skill"><b>Research</b><span>WEB3 ECOSYSTEM</span></div><div class="skill"><b>Canva</b><span>VISUAL CONTENT</span></div><div class="skill"><b>English / ID</b><span>COMMUNICATION</span></div></div></section></div>
+    <section class="journal-preview"><div class="shell"><div class="journal-heading reveal"><div><div class="eyebrow">05 / FROM THE JOURNAL</div><h2>Signals worth <span>sharing.</span></h2></div><a class="journal-cta" href="blog.html">READ MORE / JOURNAL ↗</a></div><div class="journal-grid reveal" id="journal-preview"><div class="journal-empty">MEMUAT TRANSMISSIONS...</div></div></div></section>
+    <section class="cta" id="contact"><div class="shell"><div class="eyebrow">06 / LET'S CONNECT</div><h2 class="reveal">Punya sesuatu yang menarik?<br><a href="mailto:hello@bagasady.com">Mari bicara.</a></h2></div><div class="shell footerline"><span>© 2026 BAGAS ADY SANTOSO</span><div class="socials"><a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LINKEDIN ↗</a><a href="https://x.com" target="_blank" rel="noreferrer">X / TWITTER ↗</a><a href="mailto:hello@bagasady.com">EMAIL ↗</a></div><span>MADE FOR THE OPEN WEB</span></div></section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase.js"></script><script>
+    const glow=document.querySelector('.cursor-glow'); window.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});
+    const nav=document.querySelector('.nav');addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>24),{passive:true});
+    const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function splitText(element){
+      const walker=document.createTreeWalker(element,NodeFilter.SHOW_TEXT);
+      const textNodes=[]; while(walker.nextNode()) textNodes.push(walker.currentNode);
+      textNodes.forEach(node=>{
+        const words=node.nodeValue.trim().split(/\s+/); if(!node.nodeValue.trim()) return;
+        const fragment=document.createDocumentFragment();
+        words.forEach((word,index)=>{const part=document.createElement('span');part.className='word';part.textContent=word;part.style.transitionDelay=`${Math.min(index*55,440)}ms`;fragment.appendChild(part);});
+        node.parentNode.replaceChild(fragment,node);
+      });
+      element.classList.add('split-text');
+    }
+    const textTargets=document.querySelectorAll('h1, h2, .service h3, .role h3');
+    if(!reduceMotion) textTargets.forEach(splitText);
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.14,rootMargin:'0px 0px -7% 0px'});
+    document.querySelectorAll('.reveal, .split-text').forEach(el=>observer.observe(el));
+    if(reduceMotion) document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
+    const block=document.querySelector('#block-number'); setInterval(()=>block.textContent=(23118824+Math.floor(Date.now()/12000)%999).toLocaleString('en-US'),12000);
+    const canvas=document.querySelector('.chain-canvas'),ctx=canvas.getContext('2d'); let nodes=[];
+    function resize(){canvas.width=innerWidth*devicePixelRatio;canvas.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);const count=Math.min(44,Math.floor(innerWidth/30));nodes=Array.from({length:count},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*1.7+.5}));}
+    function draw(){ctx.clearRect(0,0,innerWidth,innerHeight);nodes.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>innerWidth)n.vx*=-1;if(n.y<0||n.y>innerHeight)n.vy*=-1});for(let i=0;i<nodes.length;i++){for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);if(d<145){ctx.strokeStyle=`rgba(198,255,68,${.10*(1-d/145)})`;ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}}nodes.forEach(n=>{ctx.fillStyle='rgba(198,255,68,.36)';ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fill();});requestAnimationFrame(draw)} resize();draw();addEventListener('resize',resize);
+    const journal=document.querySelector('#journal-preview'),esc=value=>String(value||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));if(window.SUPABASE_URL&&!window.SUPABASE_URL.includes('PASTE_')){const db=supabase.createClient(window.SUPABASE_URL,window.SUPABASE_ANON_KEY);db.from('posts').select('title,slug,excerpt,category,published_at').eq('status','published').order('published_at',{ascending:false}).limit(3).then(({data})=>{if(!data?.length){journal.innerHTML='<div class="journal-empty">BELUM ADA TRANSMISSION. <a href="blog.html" style="color:var(--lime)">EXPLORE JOURNAL ↗</a></div>';return}journal.innerHTML=data.map(post=>`<a class="journal-card" href="blog.html?post=${encodeURIComponent(post.slug)}"><span class="journal-meta">${esc(post.category||'WEB3')} / ${new Date(post.published_at).toLocaleDateString('id-ID')}</span><h3>${esc(post.title)}</h3><p>${esc(post.excerpt||'')}</p><span class="journal-read">READ MORE <span>↗</span></span></a>`).join('')})}
+  </script>
+</body>
+</html>
