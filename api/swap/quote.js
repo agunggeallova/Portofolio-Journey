@@ -5,9 +5,9 @@ export default async function handler(request, response) {
   if (!process.env.ZEROX_API_KEY) return response.status(503).json({ error: 'ZEROX_API_KEY belum diatur pada Vercel.' });
   try {
     const qs = new URLSearchParams({ chainId, sellToken, buyToken, sellAmount, taker });
-    const api = await fetch(`https://api.0x.org/swap/allowance-holder/quote?${qs}`, { headers: { '0x-api-key': process.env.ZEROX_API_KEY, '0x-version': 'v2' } });
+    const api = await fetch(`https://api.0x.org/swap/permit2/quote?${qs}`, { headers: { '0x-api-key': process.env.ZEROX_API_KEY, '0x-version': 'v2' } });
     const payload = await api.json();
-    if (!api.ok) return response.status(api.status).json({ error: payload.reason || payload.validationErrors?.[0]?.reason || 'Quote tidak tersedia.' });
+    if (!api.ok) return response.status(api.status).json({ error: payload.reason || payload.validationErrors?.[0]?.reason || payload.message || `0x API error (${api.status})` });
     response.setHeader('Cache-Control', 'no-store');
     return response.status(200).json(payload);
   } catch { return response.status(502).json({ error: 'Aggregator quote tidak dapat dihubungi.' }); }
