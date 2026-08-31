@@ -30,7 +30,16 @@ function LogoCell({ project }) {
             width={120}
             height={36}
             onError={() => setFailed(true)}
-            className="max-h-9 w-auto max-w-[120px] object-contain grayscale opacity-60 transition duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+            /*
+              Rest state renders each mark as a flat white silhouette rather
+              than greyscale: several of these wordmarks are near-black, and
+              greyscale keeps luminance, so Taiko and Safle scored ~1.7:1
+              against the card and effectively disappeared. brightness-0 then
+              invert gives every logo identical weight while preserving the
+              artwork's own shape and transparency. Hover restores true brand
+              colour, so nothing is permanently altered.
+            */
+            className="max-h-9 w-auto max-w-[120px] object-contain brightness-0 invert opacity-70 transition duration-300 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100"
           />
         </span>
       ) : null}

@@ -31,6 +31,8 @@ the extension in `lib/projects.js` to match.
 - Compress PNGs before committing (TinyPNG or `oxipng`) — these load on the
   homepage.
 
-Logos render greyscale at rest and return to full colour on hover, so light
-and dark marks both sit comfortably on the dark background without the
-artwork itself being altered.
+Logos render as flat white silhouettes at rest and return to their true brand
+colour on hover. Greyscale was tried first but preserves luminance, and
+several of these wordmarks are near-black — Taiko and Safle measured about
+1.7:1 against the card and were effectively invisible. The silhouette gives
+every mark the same weight (6.8:1) without permanently altering the artwork.
