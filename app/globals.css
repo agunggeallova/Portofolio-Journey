@@ -120,6 +120,25 @@ a {
   box-shadow: none;
 }
 
+/*
+  In the two-column section headers the eyebrow is a grid item, so it
+  stretches to the full height of the heading beside it; since .eyebrow
+  centres its own content, the label then floats to the middle of a tall
+  heading instead of sitting beside its first line. Pin it to the top and
+  nudge it down to the heading's cap height, which the heading overshoots
+  because its line-height is below 1.
+*/
+.section-eyebrow {
+  align-self: start;
+  padding-top: 0.35em;
+}
+
+@media (max-width: 767px) {
+  .section-eyebrow {
+    padding-top: 0;
+  }
+}
+
 /* scroll reveal */
 .reveal {
   opacity: 0;
