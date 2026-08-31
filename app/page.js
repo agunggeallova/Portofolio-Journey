@@ -11,8 +11,6 @@ import NetworkCanvas from "../components/NetworkCanvas";
 import CursorGlow from "../components/CursorGlow";
 import ScrollProgress from "../components/ScrollProgress";
 
-export const dynamic = "force-dynamic";
-
 export default function Home() {
   return (
     <>
