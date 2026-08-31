@@ -17,9 +17,9 @@ const CROP = { x: 0.275, y: 0.22, w: 0.46, h: 0.46 };
 const INFO = [
   { label: "Subject", value: "Bagas Ady Santoso" },
   { label: "Handle", value: "@bagasady" },
-  { label: "Role", value: "Web3 Community Growth" },
-  { label: "Status", value: "Building | Growing | Shipping" },
-  { label: "Focus", value: "Community, Education, Content" },
+  { label: "Role", value: "Web3 Growth & Product" },
+  { label: "Status", value: "Research | Build | Grow" },
+  { label: "Focus", value: "Growth, Product, Research" },
   { label: "Years Active", value: "4+" },
   { label: "Projects", value: "8" },
   { label: "Based In", value: "Indonesia" },

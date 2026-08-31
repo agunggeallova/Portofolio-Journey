@@ -22,7 +22,8 @@ const dmMono = DM_Mono({
 
 export const metadata = {
   title: "Bagas Ady Santoso — Web3 Builder",
-  description: "Bagas Ady Santoso — Web3 Community Growth, Strategy & Creative.",
+  description:
+    "Bagas Ady Santoso — Web3 growth and product professional working across community, research, technology, and digital business.",
 };
 
 export default function RootLayout({ children }) {
