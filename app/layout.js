@@ -47,27 +47,22 @@ export const metadata = {
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
   alternates: { canonical: "/" },
+  // No `images` here on purpose: app/opengraph-image.js and app/twitter-image.js
+  // generate the 1200x630 card and register the tags themselves.
   openGraph: {
-    type: "website",
+    type: "profile",
     siteName: site.name,
     url: site.url,
     title,
     description,
     locale: "en_US",
-    images: [
-      {
-        url: "/bagas-ady-santoso.png",
-        width: 400,
-        height: 400,
-        alt: `${site.name} — ${site.role}`,
-      },
-    ],
+    firstName: "Bagas Ady",
+    lastName: "Santoso",
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: ["/bagas-ady-santoso.png"],
   },
   robots: {
     index: true,

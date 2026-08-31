@@ -19,12 +19,12 @@ export async function generateMetadata({ params }) {
     title,
     description: study.tagline,
     alternates: { canonical: `/work/${slug}` },
+    // images omitted so the case study inherits the generated root card
     openGraph: {
       type: "article",
       title: `${title} — ${site.name}`,
       description: study.tagline,
       url: `${site.url}/work/${slug}`,
-      images: [{ url: "/bagas-ady-santoso.png", width: 400, height: 400, alt: site.name }],
     },
     twitter: {
       card: "summary_large_image",
