@@ -31,6 +31,24 @@ a {
   }
 }
 
+/*
+  Same horizontal rhythm as .shell, but scoped to the inline axis only:
+  `margin: auto` would absorb vertical free space and defeat justify-between
+  in a flex column, and the `padding` shorthand would clobber utilities like
+  pt-8 on the same element.
+*/
+.shell-inline {
+  width: min(1440px, 100%);
+  margin-inline: auto;
+  padding-inline: 42px;
+}
+
+@media (max-width: 760px) {
+  .shell-inline {
+    padding-inline: 20px;
+  }
+}
+
 /* background layers */
 .grid-overlay {
   position: fixed;

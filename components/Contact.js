@@ -24,7 +24,7 @@ export default function Contact() {
         ✦
       </span>
 
-      <div ref={headRef} className="reveal">
+      <div ref={headRef} className="reveal shell-inline">
         <div className="eyebrow">{t.eyebrow}</div>
 
         <h2 className="relative font-serif font-semibold leading-[0.95] tracking-tighter text-[clamp(2.8rem,8vw,7.5rem)] max-w-[1000px] my-10">
@@ -41,7 +41,7 @@ export default function Contact() {
 
       <div
         ref={footRef}
-        className="reveal flex flex-col md:flex-row justify-between gap-5 pt-8 border-t border-paper/25 font-mono text-[10px] text-[#aeb8ac]"
+        className="reveal shell-inline flex flex-col md:flex-row justify-between gap-5 pt-8 border-t border-paper/25 font-mono text-[10px] text-[#aeb8ac]"
       >
         <span>{t.copyright}</span>
         <div className="flex gap-6">

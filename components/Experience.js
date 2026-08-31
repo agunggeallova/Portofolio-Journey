@@ -33,7 +33,7 @@ export default function Experience() {
               <h3 className="font-serif font-semibold text-[19px] tracking-tight m-0">
                 {r.title} <span className="text-lime">—</span> {r.role}
               </h3>
-              <small className="mt-1 block text-[#78817c] text-xs">{r.desc}</small>
+              <small className="mt-2 block text-[#78817c] text-xs leading-relaxed">{r.desc}</small>
             </div>
             <div className="hidden md:block border border-line text-[#bcc4bf] px-2.5 py-1.5 font-mono text-[9px] uppercase self-start">
               {r.tag}
