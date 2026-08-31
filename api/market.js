@@ -1,3 +1,5 @@
+export const config = { maxDuration: 10 };
+
 export default async function handler(request, response) {
   if (!process.env.CMC_API_KEY) return response.status(503).json({ error: 'CMC_API_KEY belum diatur.' });
   const limit = Math.min(Math.max(Number(request.query.limit) || 100, 1), 200);
