@@ -14,9 +14,11 @@ is incomplete.
 | `talaxeum.png`           | TALAXEUM          |
 | `larix.png`              | Project Larix     |
 | `channels-finance.png`   | Channels.finance  |
-| `cryptoiz.png`           | Cryptoiz Research |
-| `incrypto-school.png`    | InCrypto School   |
 | `taiko.png`              | Taiko             |
+
+Cryptoiz Research and InCrypto School are intentionally wordmark-only —
+no official artwork was available. To give them logos later, add the file
+here and set its path in `lib/projects.js` (they are `logo: null` today).
 
 `.svg` is preferred where the project publishes one — if you use SVG, change
 the extension in `lib/projects.js` to match.
