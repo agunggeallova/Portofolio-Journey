@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { site } from "../lib/site";
 
 const RAMP = " .:-=+*%@#".split("");
 const COLS = 58;
@@ -15,14 +16,13 @@ const COLS = 58;
 const CROP = { x: 0.275, y: 0.22, w: 0.46, h: 0.46 };
 
 const INFO = [
-  { label: "Subject", value: "Bagas Ady Santoso" },
+  { label: "Subject", value: site.name },
   { label: "Handle", value: "@bagasady" },
   { label: "Role", value: "Web3 Growth & Product" },
-  { label: "Status", value: "Research | Build | Grow" },
-  { label: "Focus", value: "Growth, Product, Research" },
-  { label: "Years Active", value: "4+" },
-  { label: "Projects", value: "8" },
-  { label: "Based In", value: "Indonesia" },
+  { label: "Focus", value: "Growth · Product · Community · Research" },
+  { label: "Status", value: "Researching · Building · Shipping" },
+  { label: "Experience", value: `${site.yearsInWeb3} Years in Web3` },
+  { label: "Based", value: site.location },
 ];
 
 export default function ProfileScan() {

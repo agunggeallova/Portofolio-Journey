@@ -1,5 +1,6 @@
 "use client";
 
+import SectionHeader from "./SectionHeader";
 import { useReveal } from "./useReveal";
 import { useLanguage } from "../lib/LanguageContext";
 import { translations } from "../lib/translations";
@@ -48,21 +49,18 @@ function Panel({ panel }) {
 export default function About() {
   const { lang } = useLanguage();
   const t = translations[lang].about;
-  const topRef = useReveal();
   const bodyRef = useReveal();
   const panelsRef = useReveal();
 
   return (
-    <div className="shell" id="about">
-      <section className="section-y">
-        <div ref={topRef} className="reveal grid grid-cols-1 md:grid-cols-[32%_1fr] mb-12 md:mb-16 gap-6">
-          <div className="eyebrow section-eyebrow">{t.eyebrow}</div>
-          <h2 className="font-serif font-semibold leading-[1.04] tracking-tighter text-[clamp(2.2rem,4.5vw,4.8rem)] max-w-[830px]">
-            {t.headingPre}
-            <span className="text-lime">{t.headingHighlight}</span>
-            {t.headingPost}
-          </h2>
-        </div>
+    <div className="shell">
+      <section id="about" className="section-y scroll-mt-24">
+        <SectionHeader
+          eyebrow={t.eyebrow}
+          pre={t.headingPre}
+          highlight={t.headingHighlight}
+          post={t.headingPost}
+        />
 
         <div ref={bodyRef} className="reveal grid grid-cols-1 md:grid-cols-[32%_1fr] gap-6 md:gap-0">
           <div />
@@ -80,35 +78,41 @@ export default function About() {
               {t.tagline}
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-px border border-line bg-line mt-10 rounded-lg overflow-hidden">
+            <dl className="grid grid-cols-1 sm:grid-cols-3 gap-px border border-line bg-line mt-10 rounded-lg overflow-hidden m-0">
               {t.stats.map((s) => (
                 <div
                   key={s.label}
                   className="bg-gradient-to-b from-white/[0.03] to-transparent px-6 py-7 transition-colors hover:from-lime/[0.06]"
                 >
-                  <strong className="block font-serif font-semibold leading-none tracking-tighter text-[clamp(2rem,3vw,3.4rem)] text-lime mb-3">
-                    {s.value}
-                  </strong>
-                  <span className="text-[#9fa8a2] font-mono text-[10px] uppercase tracking-wide">
-                    {s.label}
-                  </span>
+                  <dt className="sr-only">{s.label}</dt>
+                  <dd className="m-0">
+                    <strong className="block font-serif font-semibold leading-none tracking-tighter text-[clamp(2rem,3vw,3.4rem)] text-lime mb-3">
+                      {s.value}
+                    </strong>
+                    <span className="text-[#9fa8a2] font-mono text-[10px] uppercase tracking-wide">
+                      {s.label}
+                    </span>
+                  </dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </div>
         </div>
 
-        <div ref={panelsRef} className="reveal grid grid-cols-1 md:grid-cols-[32%_1fr] gap-6 md:gap-0 mt-16 md:mt-20">
+        <div
+          ref={panelsRef}
+          className="reveal grid grid-cols-1 md:grid-cols-[32%_1fr] gap-6 md:gap-0 mt-16 md:mt-20"
+        >
           <div className="font-mono text-[10px] tracking-[0.12em] text-[#6d786f] uppercase section-eyebrow">
             {t.pillarsTitle}
           </div>
 
           <div className="max-w-[760px]">
-            <div className="flex flex-wrap gap-2.5">
+            <ul className="flex flex-wrap gap-2.5 m-0 p-0 list-none">
               {t.pillars.map((p) => {
                 const IconCmp = Icons[p.icon];
                 return (
-                  <span
+                  <li
                     key={p.label}
                     className="inline-flex items-center gap-2 border border-line rounded-full pl-3 pr-4 py-2 text-[11px] font-mono tracking-wide text-[#c3c9c5] transition-colors hover:border-lime/40 hover:text-paper"
                   >
@@ -116,10 +120,10 @@ export default function About() {
                       {IconCmp ? <IconCmp /> : null}
                     </span>
                     {p.label}
-                  </span>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
 
             <p className="mt-8 mb-4 font-mono text-[10px] tracking-[0.12em] text-[#6d786f] uppercase">
               {t.panelsHint}

@@ -1,13 +1,38 @@
-# Bagas Ady — Portfolio
+# Bagas Ady Santoso — Portfolio
 
-Landing page dibangun dengan **Next.js** (di `app/`, termasuk endpoint API di `app/api/`). Halaman `market.html`, `scanner.html`, dan file statis lain disajikan apa adanya dari folder `public/`.
+Personal portfolio for a Web3 growth, product and research professional.
+Built with **Next.js** (App Router) and Tailwind, deployed on Vercel.
 
-## Menjalankan secara lokal
+## Structure
+
+```
+app/
+  layout.js          metadata, Open Graph, Person JSON-LD
+  page.js            homepage section order (00 hero → 08 contact)
+  globals.css        design tokens, section rhythm, a11y helpers
+  api/               serverless endpoints for the Lab tools
+  work/[slug]/       case study pages
+components/          one component per section, plus shared primitives
+lib/
+  site.js            identity + outbound links (single source of truth)
+  translations.js    all EN/ID copy
+  caseStudies.js     case study content
+public/
+  market.html        Lab experiment 001
+  scanner.html       Lab experiment 002
+```
+
+Content lives in `lib/`, not in components — edit copy there and both
+languages stay in sync.
+
+## Local development
 
 1. `npm install`
-2. `npm run dev` lalu buka `http://localhost:3000`.
-3. `npm run build` untuk build production.
+2. `npm run dev` → http://localhost:3000
+3. `npm run build` for a production build
 
-## Market Terminal (CoinMarketCap)
+## Environment variables
 
-`market.html` menggunakan endpoint aman `app/api/market/route.js`, bukan API key di browser. Deploy ke Vercel lalu buat environment variable `CMC_API_KEY` pada **Project Settings → Environment Variables** dengan key CoinMarketCap Anda. Setelah redeploy, halaman Market akan memuat harga token terbaru. File HTML yang dibuka langsung tidak dapat menjalankan endpoint `/api/market`.
+`CMC_API_KEY` — CoinMarketCap key used by `/api/market` (Market Terminal).
+Set it in **Vercel → Project Settings → Environment Variables**. The scanner
+endpoints use public APIs (GoPlus, DexScreener) and need no key.

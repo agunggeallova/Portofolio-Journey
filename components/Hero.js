@@ -33,7 +33,10 @@ export default function Hero() {
           </span>
         </div>
 
-        <div className="hidden lg:block absolute right-[-102px] top-11 w-[590px] h-[590px] border border-lime/20 rounded-full spin-slow -z-10">
+        <div
+          aria-hidden="true"
+          className="hidden lg:block absolute right-[-102px] top-11 w-[590px] h-[590px] border border-lime/20 rounded-full spin-slow -z-10"
+        >
           <span className="absolute inset-[70px] border border-dashed border-lime/25 rounded-full" />
         </div>
 
@@ -48,7 +51,9 @@ export default function Hero() {
 
         <div className="flex flex-col items-start justify-center md:justify-start pt-6 md:pt-8">
           <div className="eyebrow">{t.eyebrow}</div>
-          <h1 className="font-serif font-bold leading-[0.92] tracking-tighter text-[clamp(3.2rem,9vw,9rem)] lg:text-[clamp(2.6rem,6vw,4.5rem)] xl:text-[clamp(3.2rem,9vw,9rem)] my-8">
+          {/* the tight display leading only works while the headline holds two
+              lines; on narrow screens it wraps to four or five and needs air */}
+          <h1 className="font-serif font-bold leading-[1.02] sm:leading-[0.94] tracking-tighter text-[clamp(2.9rem,9vw,9rem)] lg:text-[clamp(2.6rem,6vw,4.5rem)] xl:text-[clamp(3.2rem,9vw,9rem)] my-8">
             <SplitText key={`${lang}-1`} as="span" text={t.h1Line1} className="block" />
             <SplitText key={`${lang}-2`} as="span" text={t.h1Line2} className="block text-lime" />
           </h1>
