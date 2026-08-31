@@ -10,10 +10,10 @@ export default function Experience() {
   const ref = useReveal();
 
   return (
-    <section id="experience" className="pb-16 md:pb-24">
+    <section id="experience" className="section-y-top pb-[60px] md:pb-[90px]">
       <div ref={ref} className="reveal grid grid-cols-1 md:grid-cols-[32%_1fr] mb-12 md:mb-16 gap-6">
         <div className="eyebrow section-eyebrow">{t.eyebrow}</div>
-        <h2 className="font-serif font-semibold leading-[0.95] tracking-tighter text-[clamp(2.2rem,4.5vw,4.8rem)] max-w-[830px]">
+        <h2 className="font-serif font-semibold leading-[1.04] tracking-tighter text-[clamp(2.2rem,4.5vw,4.8rem)] max-w-[830px]">
           {t.headingPre}
           <span className="text-lime">{t.headingHighlight}</span>
           {t.headingPost}

@@ -27,7 +27,7 @@ export default function Contact() {
       <div ref={headRef} className="reveal shell-inline">
         <div className="eyebrow">{t.eyebrow}</div>
 
-        <h2 className="relative font-serif font-semibold leading-[0.95] tracking-tighter text-[clamp(2.8rem,8vw,7.5rem)] max-w-[1000px] my-10">
+        <h2 className="relative font-serif font-semibold leading-[1.04] tracking-tighter text-[clamp(2.8rem,8vw,7.5rem)] max-w-[1000px] my-10">
           {t.headingLine1}
           <br />
           <a

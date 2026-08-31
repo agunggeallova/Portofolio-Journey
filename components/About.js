@@ -12,10 +12,10 @@ export default function About() {
 
   return (
     <div className="shell" id="about">
-      <section>
+      <section className="section-y">
         <div ref={topRef} className="reveal grid grid-cols-1 md:grid-cols-[32%_1fr] mb-12 md:mb-16 gap-6">
           <div className="eyebrow section-eyebrow">{t.eyebrow}</div>
-          <h2 className="font-serif font-semibold leading-[0.95] tracking-tighter text-[clamp(2.2rem,4.5vw,4.8rem)] max-w-[830px]">
+          <h2 className="font-serif font-semibold leading-[1.04] tracking-tighter text-[clamp(2.2rem,4.5vw,4.8rem)] max-w-[830px]">
             {t.headingPre}
             <span className="text-lime">{t.headingHighlight}</span>
             {t.headingPost}
