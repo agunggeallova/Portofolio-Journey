@@ -340,3 +340,59 @@ a {
     transform: none;
   }
 }
+
+/* ============================================================
+   HERO
+   Scoped to the above-the-fold block only. Every selector here is
+   prefixed `hero-` and used exclusively by components/Hero.js, so
+   none of it can reach the sections below.
+   ============================================================ */
+
+.hero-section {
+  /* the sticky nav is 82px of the first screen, so subtract it to fill
+     exactly one viewport; svh keeps mobile browser chrome from clipping */
+  min-height: max(620px, calc(100svh - 82px));
+}
+
+.hero-headline {
+  font-size: clamp(3.1rem, 16.5vw, 4.6rem);
+  line-height: 0.92;
+}
+
+@media (min-width: 1024px) {
+  .hero-headline {
+    /* scale on whichever of width or height is tighter, so short laptops
+       (1366x768, 1536x864) shrink the type instead of clipping it */
+    font-size: clamp(3.4rem, min(8.4vw, 13vh), 9.5rem);
+    line-height: 0.9;
+  }
+}
+
+/* Staggered line indents. Deliberate, and they collapse to a small nudge
+   on mobile so the headline keeps one clean left edge. */
+.hero-line-a {
+  margin-left: clamp(0.5rem, 2.4vw, 2.4rem);
+}
+
+.hero-line-b {
+  margin-left: clamp(0.5rem, 2vw, 2rem);
+}
+
+/* Terminal card slot. On mobile it runs the full content width so its left
+   edge lines up with the eyebrow, headline and intro. From lg it is capped
+   so it stays clear of the right edge and never outgrows the headline. */
+.hero-terminal-slot {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .hero-terminal-slot {
+    max-width: clamp(20rem, 34vw, 31.25rem);
+  }
+}
+
+/* Orbital decoration sits behind the terminal as environmental UI. */
+.hero-orbital {
+  width: clamp(26rem, 42vw, 36.875rem);
+  aspect-ratio: 1;
+}
