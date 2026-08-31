@@ -7,6 +7,7 @@ is incomplete.
 
 | Filename                 | Project           |
 | ------------------------ | ----------------- |
+| `plubit.png`             | PLUBIT            |
 | `prasaga.png`            | PraSaga           |
 | `safle.png`              | Safle             |
 | `krystal-wallet.png`     | Krystal Wallet    |
@@ -15,6 +16,7 @@ is incomplete.
 | `channels-finance.png`   | Channels.finance  |
 | `cryptoiz.png`           | Cryptoiz Research |
 | `incrypto-school.png`    | InCrypto School   |
+| `taiko.png`              | Taiko             |
 
 `.svg` is preferred where the project publishes one — if you use SVG, change
 the extension in `lib/projects.js` to match.

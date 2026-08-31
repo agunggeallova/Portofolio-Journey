@@ -67,7 +67,10 @@ export default function ContributedTo() {
             </p>
           </div>
 
-          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-px bg-line border border-line rounded-lg overflow-hidden m-0 p-0 list-none">
+          {/* Column counts must divide the project count exactly: the 1px gaps
+              are the container's background showing through, so an incomplete
+              final row would render as a pale block. 10 items → 2 or 5. */}
+          <ul className="grid grid-cols-2 lg:grid-cols-5 gap-px bg-line border border-line rounded-lg overflow-hidden m-0 p-0 list-none">
             {contributedProjects.map((project) => (
               <LogoCell key={project.name} project={project} />
             ))}
