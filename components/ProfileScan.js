@@ -3,10 +3,16 @@
 import { useEffect, useRef, useState } from "react";
 
 const RAMP = " .:-=+*%@#".split("");
-const COLS = 44;
+const COLS = 58;
 
-// Crop fractions of the source photo, zoomed toward the face/head area.
-const CROP = { x: 0.17, y: 0.02, w: 0.66, h: 0.66 };
+/*
+  Crop fractions of the source photo. The head sits at roughly y 0.29-0.44
+  of the 400x400 original, so a wider crop leaves it about a fifth of the
+  frame and buries it in waterfall and foliage. This square window is
+  centred on the head and cropped to head-and-shoulders, which puts the
+  face in the upper half and roughly a third of the frame height.
+*/
+const CROP = { x: 0.275, y: 0.22, w: 0.46, h: 0.46 };
 
 const INFO = [
   { label: "Subject", value: "Bagas Ady Santoso" },
@@ -95,7 +101,14 @@ export default function ProfileScan() {
     fit();
     const ro = new ResizeObserver(fit);
     ro.observe(box);
-    return () => ro.disconnect();
+    // ResizeObserver notifications are delivered as part of the rendering
+    // steps, so they can be skipped while the page is throttled. A plain
+    // resize listener keeps a stale scale from leaving a gap in the panel.
+    addEventListener("resize", fit);
+    return () => {
+      ro.disconnect();
+      removeEventListener("resize", fit);
+    };
   }, [ascii]);
 
   return (
