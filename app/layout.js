@@ -1,6 +1,6 @@
 import { Space_Grotesk, Manrope, DM_Mono } from "next/font/google";
 import { LanguageProvider } from "../lib/LanguageContext";
-import { site, linkedinUrl, mediumUrl } from "../lib/site";
+import { site, linkedinUrl, mediumUrl, telegramUrl } from "../lib/site";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -87,7 +87,7 @@ const personSchema = {
     "@type": "PostalAddress",
     addressCountry: site.location,
   },
-  sameAs: [linkedinUrl, mediumUrl],
+  sameAs: [linkedinUrl, mediumUrl, telegramUrl],
   knowsAbout: [
     "Web3",
     "Blockchain",
