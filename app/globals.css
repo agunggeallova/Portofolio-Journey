@@ -505,3 +505,80 @@ a {
     opacity: 0;
   }
 }
+
+/* ============================================================
+   HERO HUD LABELS
+   Four readouts orbiting the terminal card. The outer span carries the
+   same float-y as the card — no animation-delay on it, so the bob stays
+   in phase — while the inner span owns the typing loop and its own
+   stagger. Splitting them is what keeps those two independent.
+   ============================================================ */
+
+/*
+  No `display` here on purpose. This file is appended after @tailwind
+  utilities, so a display declared on this class would outrank Tailwind's
+  `hidden` and the labels would stay visible below xl. Visibility is left
+  entirely to the utilities on the element.
+*/
+.hero-hud {
+  position: absolute;
+  pointer-events: none;
+  animation: float-y 5s ease-in-out infinite;
+}
+
+.hero-hud-type {
+  display: block;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: rgba(200, 255, 92, 0.62);
+  border-right: 1px solid var(--lime);
+  animation: hud-type var(--hud-dur, 7s) steps(var(--hud-chars, 18), end) infinite,
+    hud-caret 0.9s step-end infinite;
+}
+
+/*
+  1ch is the glyph advance only — it excludes letter-spacing, so a plain
+  `chars * 1ch` target fell ~26px short on an 18-character label and clipped
+  the last three or four glyphs. The per-character advance here is the glyph
+  plus the tracking.
+*/
+@keyframes hud-type {
+  0% {
+    width: 0;
+  }
+  42% {
+    width: calc(var(--hud-chars) * (1ch + 0.14em));
+  }
+  88% {
+    width: calc(var(--hud-chars) * (1ch + 0.14em));
+  }
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes hud-caret {
+  0%,
+  100% {
+    border-color: var(--lime);
+  }
+  50% {
+    border-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-hud {
+    animation: none;
+  }
+  /* still readable, just not typing or blinking */
+  .hero-hud-type {
+    width: auto;
+    animation: none;
+    border-right-color: transparent;
+  }
+}

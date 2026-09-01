@@ -23,6 +23,20 @@ export default function Hero() {
     indent only reads as deliberate when each line break is fixed. Lines 3
     and 4 carry the lime accent.
   */
+  /*
+    Decorative readouts orbiting the terminal. Each types itself out, holds,
+    then clears and loops; the staggered delays stop them firing in unison.
+    Character counts drive the typewriter width, so they must match the text.
+  */
+  const hud = [
+    { text: "[ BUILD_MODE: ON ]", chars: 18, dur: "7s", delay: "0s", pos: "-top-9 -left-28" },
+    { text: "NETWORK // ONCHAIN", chars: 18, dur: "8s", delay: "1.4s", pos: "-top-12 -right-14" },
+    { text: "> RESEARCHING...", chars: 16, dur: "6.5s", delay: "2.6s", pos: "-bottom-10 -left-32" },
+    // 23 rather than 21: the two arrows are wider than a mono advance, so the
+    // count is padded to cover the real text width
+    { text: "SHIP → ITERATE → GROW", chars: 23, dur: "9s", delay: "3.8s", pos: "-bottom-14 -right-20" },
+  ];
+
   const headline = [
     { key: "1", text: t.h1Line1, accent: false, indent: "" },
     { key: "2", text: t.h1Line2, accent: false, indent: "hero-line-a" },
@@ -90,8 +104,29 @@ export default function Hero() {
               with the eyebrow, headline and intro; centred in its own column
               from lg so it reads as right-of-centre without hugging the edge */}
           <div className="flex justify-start lg:justify-center">
-            <div className="hero-terminal-slot">
+            <div className="hero-terminal-slot relative">
               <ProfileScan />
+
+              {/* HUD readouts sit outside the card, so they only appear from xl
+                  where there is room beside it without reaching the headline */}
+              {hud.map((item) => (
+                <span
+                  key={item.text}
+                  aria-hidden="true"
+                  className={`hero-hud hidden xl:flex ${item.pos}`}
+                >
+                  <span
+                    className="hero-hud-type"
+                    style={{
+                      "--hud-chars": item.chars,
+                      "--hud-dur": item.dur,
+                      animationDelay: `${item.delay}, 0s`,
+                    }}
+                  >
+                    {item.text}
+                  </span>
+                </span>
+              ))}
             </div>
           </div>
         </div>
