@@ -19,16 +19,18 @@ function LogoCell({ project }) {
   const showLogo = Boolean(project.logo) && !failed;
 
   return (
-    <li className="group bg-[#0d110e] px-4 py-6 flex flex-col items-center justify-center gap-3 text-center transition-colors hover:bg-[#141d13]">
+    <li className="group bg-[#0d110e] px-3 py-7 flex flex-col items-center justify-center gap-3.5 text-center transition-colors hover:bg-[#141d13]">
       {showLogo ? (
-        <span className="h-9 w-full grid place-items-center">
+        // the box sets the ceiling; the mark fills whichever axis runs out
+        // first, so a wide wordmark and a compact glyph carry equal weight
+        <span className="h-12 sm:h-14 w-full grid place-items-center">
           <img
             src={project.logo}
             alt={`${project.name} logo`}
             loading="lazy"
             decoding="async"
             width={120}
-            height={36}
+            height={60}
             onError={() => setFailed(true)}
             /*
               Rest state renders each mark as a flat white silhouette rather
@@ -39,7 +41,10 @@ function LogoCell({ project }) {
               artwork's own shape and transparency. Hover restores true brand
               colour, so nothing is permanently altered.
             */
-            className="max-h-9 w-auto max-w-[120px] object-contain brightness-0 invert opacity-70 transition duration-300 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100"
+            /* explicit px ceilings rather than max-h-full: a percentage
+               max-height doesn't bind on a grid item here, and the mark
+               overflowed its box into the label below */
+            className="max-h-12 sm:max-h-14 max-w-full w-auto object-contain brightness-0 invert opacity-70 transition duration-300 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100"
           />
         </span>
       ) : null}
