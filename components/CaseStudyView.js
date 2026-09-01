@@ -57,20 +57,43 @@ export default function CaseStudyView({ slug }) {
             <p className="text-[15px] leading-[1.8] text-[#a9b3ac] m-0">{study.context}</p>
           </Block>
 
+          {/* Entries are either a plain string or { title, desc }. The detailed
+              form needs a full-width column to read, so the two-column bullet
+              grid is only used for the plain list. */}
           <Block label={t.sections.worked}>
-            <ul className="grid sm:grid-cols-2 gap-2.5 m-0 p-0 list-none">
-              {study.worked.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-baseline gap-2.5 font-mono text-[12px] leading-relaxed text-[#c3c9c5]"
-                >
-                  <span aria-hidden="true" className="text-lime text-[9px] shrink-0">
-                    ▸
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
+            {typeof study.worked[0] === "string" ? (
+              <ul className="grid sm:grid-cols-2 gap-2.5 m-0 p-0 list-none">
+                {study.worked.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-baseline gap-2.5 font-mono text-[12px] leading-relaxed text-[#c3c9c5]"
+                  >
+                    <span aria-hidden="true" className="text-lime text-[9px] shrink-0">
+                      ▸
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <ul className="grid gap-6 m-0 p-0 list-none">
+                {study.worked.map((item, i) => (
+                  <li key={item.title} className="flex gap-4">
+                    <span className="shrink-0 font-mono text-[11px] text-lime pt-[2px]">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <h3 className="font-mono text-[12px] tracking-[0.1em] text-paper m-0">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-[13.5px] leading-[1.75] text-[#a9b3ac] m-0 max-w-[62ch]">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
           </Block>
 
           <Block label={t.sections.approach}>
