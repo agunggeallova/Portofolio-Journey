@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { OgCard, ogFonts, size, contentType } from "../../../lib/ogCard";
+import { CaseStudyCard, ogFonts, size, contentType } from "../../../lib/ogCard";
 import { caseStudies, caseStudySlugs } from "../../../lib/caseStudies";
 import { site } from "../../../lib/site";
 
@@ -23,7 +23,7 @@ export default async function Image({ params }) {
 
   return new ImageResponse(
     (
-      <OgCard
+      <CaseStudyCard
         eyebrow={study?.category || "CASE STUDY"}
         titleTop={titleTop}
         titleBottom={rest.join(" ")}
