@@ -25,8 +25,25 @@ const INFO = [
   { label: "Based", value: site.location },
 ];
 
+/*
+  Places the source photo so its visible area matches the ASCII crop exactly.
+  Scaling the image by 1/CROP.w makes the crop window fill the square box, and
+  the negative offsets slide the chosen window into view.
+*/
+const PHOTO_SCALE = 1 / CROP.w;
+const PHOTO_FIT = {
+  width: `${PHOTO_SCALE * 100}%`,
+  height: `${PHOTO_SCALE * 100}%`,
+  left: `${-CROP.x * PHOTO_SCALE * 100}%`,
+  top: `${-CROP.y * PHOTO_SCALE * 100}%`,
+  // Tailwind's preflight caps images at max-width:100%, which would undo the
+  // scale above and collapse the crop
+  maxWidth: "none",
+};
+
 export default function ProfileScan() {
   const [ascii, setAscii] = useState("");
+  const [glitching, setGlitching] = useState(false);
   const boxRef = useRef(null);
   const preRef = useRef(null);
 
@@ -80,6 +97,28 @@ export default function ProfileScan() {
       cancelled = true;
     };
   }, []);
+
+  /*
+    Every so often the scan "loses signal": the ASCII flickers out and the
+    source photo breaks through for a moment before the readout recovers.
+    Long gaps between bursts keep it a punctuation mark rather than a
+    distraction, and anyone asking for reduced motion never sees it.
+  */
+  useEffect(() => {
+    if (!ascii) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let endTimer;
+    const cycle = setInterval(() => {
+      setGlitching(true);
+      endTimer = setTimeout(() => setGlitching(false), 1500);
+    }, 8000);
+
+    return () => {
+      clearInterval(cycle);
+      clearTimeout(endTimer);
+    };
+  }, [ascii]);
 
   useEffect(() => {
     if (!ascii) return;
@@ -137,12 +176,25 @@ export default function ProfileScan() {
             <div ref={boxRef} className="relative w-full aspect-square overflow-hidden">
               <pre
                 ref={preRef}
-                className="absolute top-0 left-0 font-mono text-lime leading-[1.05] whitespace-pre select-none m-0"
+                className={`scan-ascii absolute top-0 left-0 font-mono text-lime leading-[1.05] whitespace-pre select-none m-0 ${
+                  glitching ? "is-glitching" : ""
+                }`}
                 style={{ fontSize: "8px" }}
                 aria-hidden="true"
               >
                 {ascii || "SCANNING..."}
               </pre>
+
+              {/* the real photo behind the readout, revealed only mid-glitch */}
+              <img
+                src="/bagas-ady-santoso.png"
+                alt=""
+                aria-hidden="true"
+                decoding="async"
+                className={`scan-photo ${glitching ? "is-on" : ""}`}
+                style={PHOTO_FIT}
+              />
+
               <div className="scanline" />
             </div>
           </div>

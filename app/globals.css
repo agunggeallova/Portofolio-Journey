@@ -396,3 +396,112 @@ a {
   width: clamp(26rem, 42vw, 36.875rem);
   aspect-ratio: 1;
 }
+
+/* ============================================================
+   VISUAL_MAP glitch
+   The ASCII portrait periodically tears away to the source photo.
+   Only opacity is animated on the ASCII layer: its transform carries the
+   JS fit-to-box scale, so animating transform there would break the fit.
+   ============================================================ */
+
+.scan-photo {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  /* sits a touch darker and flatter so it belongs to the dark card */
+  filter: contrast(1.08) saturate(0.95) brightness(0.9);
+  will-change: opacity, transform;
+}
+
+.scan-photo.is-on {
+  animation: scan-photo-burst 1500ms linear both;
+}
+
+.scan-ascii.is-glitching {
+  animation: scan-ascii-burst 1500ms linear both;
+}
+
+@keyframes scan-photo-burst {
+  0% {
+    opacity: 0;
+    transform: translate3d(-7px, 0, 0);
+  }
+  5% {
+    opacity: 1;
+    transform: translate3d(6px, 0, 0);
+  }
+  9% {
+    opacity: 0.1;
+    transform: translate3d(-5px, 0, 0);
+  }
+  14% {
+    opacity: 1;
+    transform: translate3d(2px, 0, 0);
+  }
+  18% {
+    opacity: 0.8;
+    transform: translate3d(-3px, 0, 0);
+  }
+  23%,
+  76% {
+    opacity: 1;
+    transform: none;
+  }
+  80% {
+    opacity: 0.15;
+    transform: translate3d(6px, 0, 0);
+  }
+  85% {
+    opacity: 1;
+    transform: translate3d(-4px, 0, 0);
+  }
+  91% {
+    opacity: 0.2;
+    transform: translate3d(3px, 0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+@keyframes scan-ascii-burst {
+  0% {
+    opacity: 1;
+  }
+  5% {
+    opacity: 0.15;
+  }
+  9% {
+    opacity: 0.9;
+  }
+  14% {
+    opacity: 0.1;
+  }
+  23%,
+  76% {
+    opacity: 0;
+  }
+  82% {
+    opacity: 0.8;
+  }
+  86% {
+    opacity: 0.1;
+  }
+  92% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-photo.is-on,
+  .scan-ascii.is-glitching {
+    animation: none;
+  }
+  .scan-photo {
+    opacity: 0;
+  }
+}
