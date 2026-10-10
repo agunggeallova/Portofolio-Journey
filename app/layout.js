@@ -1,4 +1,5 @@
 import { Space_Grotesk, Manrope, DM_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import { LanguageProvider } from "../lib/LanguageContext";
 import { site, linkedinUrl, mediumUrl, telegramUrl } from "../lib/site";
 import "./globals.css";
@@ -46,7 +47,13 @@ export const metadata = {
   ],
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    // The homepage exists in both languages at stable URLs, so crawlers can
+    // serve the Indonesian copy to Indonesian searchers instead of only the
+    // client-toggled English one.
+    languages: { en: "/", id: "/id", "x-default": "/" },
+  },
   // No `images` here on purpose: app/opengraph-image.js and app/twitter-image.js
   // generate the 1200x630 card and register the tags themselves.
   openGraph: {
@@ -56,6 +63,7 @@ export const metadata = {
     title,
     description,
     locale: "en_US",
+    localeAlternate: ["id_ID"],
     firstName: "Bagas Ady",
     lastName: "Santoso",
   },
@@ -107,6 +115,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
         <LanguageProvider>{children}</LanguageProvider>
+        <Analytics />
       </body>
     </html>
   );

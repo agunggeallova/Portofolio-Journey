@@ -25,7 +25,7 @@ export default function Writing() {
 
         <div ref={bodyRef} className="reveal md:ml-[32%] grid gap-4 md:gap-5">
           <div className="border border-line rounded-lg bg-gradient-to-b from-white/[0.03] to-transparent p-6 md:p-7">
-            <p className="font-mono text-[10px] tracking-[0.14em] text-[#6d786f] m-0">
+            <p className="font-mono text-[10px] tracking-[0.14em] text-[#7d887f] m-0">
               {t.topicsTitle}
             </p>
             <ul className="flex flex-wrap gap-2 mt-4 mb-0 p-0 list-none">
@@ -42,7 +42,7 @@ export default function Writing() {
 
           <div className="border border-line rounded-lg bg-gradient-to-b from-white/[0.03] to-transparent p-6 md:p-7 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
             <div>
-              <p className="font-mono text-[10px] tracking-[0.14em] text-[#6d786f] m-0">
+              <p className="font-mono text-[10px] tracking-[0.14em] text-[#7d887f] m-0">
                 {t.publishedTitle}
               </p>
               <ul className="mt-4 mb-0 p-0 list-none grid gap-2">

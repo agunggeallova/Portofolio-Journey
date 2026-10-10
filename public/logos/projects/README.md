@@ -7,29 +7,31 @@ is incomplete.
 
 | Filename                 | Project           |
 | ------------------------ | ----------------- |
-| `plubit.png`             | PLUBIT            |
-| `prasaga.png`            | PraSaga           |
-| `safle.png`              | Safle             |
-| `krystal-wallet.png`     | Krystal Wallet    |
-| `talaxeum.png`           | TALAXEUM          |
-| `larix.png`              | Project Larix     |
-| `channels-finance.png`   | Channels.finance  |
-| `taiko.png`              | Taiko             |
+| `plubit.webp`            | PLUBIT            |
+| `prasaga.webp`           | PraSaga           |
+| `safle.webp`             | Safle             |
+| `krystal-wallet.webp`    | Krystal Wallet    |
+| `talaxeum.webp`          | TALAXEUM          |
+| `larix.webp`             | Project Larix     |
+| `channels-finance.webp`  | Channels.finance  |
+| `taiko.webp`             | Taiko             |
 
 Cryptoiz Research and InCrypto School are intentionally wordmark-only —
 no official artwork was available. To give them logos later, add the file
 here and set its path in `lib/projects.js` (they are `logo: null` today).
 
 `.svg` is preferred where the project publishes one — if you use SVG, change
-the extension in `lib/projects.js` to match.
+the extension in `lib/projects.js` to match. Otherwise convert to `.webp`
+(the current set was converted from the original 1000x500 PNGs, which
+totalled 560KB; the WebP set is 47KB).
 
 ## Requirements
 
 - Official artwork only. No recreations, screenshots or watermarked copies.
-- Transparent background (PNG-24 or SVG).
-- Roughly 1000px wide for PNG is plenty; the grid renders them ~120px wide.
-- Compress PNGs before committing (TinyPNG or `oxipng`) — these load on the
-  homepage.
+- Transparent background (WebP, PNG-24 or SVG).
+- Roughly 320px wide for WebP is plenty; the grid renders them ~120px wide.
+- Convert to WebP before committing — these load on the homepage.
+  `scripts/optimize-images.js` shows the conversion used for the current set.
 
 Logos render as flat white silhouettes at rest and return to their true brand
 colour on hover. Greyscale was tried first but preserves luminance, and

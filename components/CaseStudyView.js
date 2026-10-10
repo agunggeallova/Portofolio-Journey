@@ -123,7 +123,7 @@ export default function CaseStudyView({ slug }) {
           </Block>
         </div>
 
-        <p className="mt-10 pt-6 border-t border-line font-mono text-[10px] leading-relaxed text-[#6d786f] max-w-[600px]">
+        <p className="mt-10 pt-6 border-t border-line font-mono text-[10px] leading-relaxed text-[#7d887f] max-w-[600px]">
           {t.note}
         </p>
 

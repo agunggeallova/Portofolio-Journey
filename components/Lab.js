@@ -40,7 +40,7 @@ export default function Lab() {
               </div>
 
               <div className="flex flex-col flex-1 p-6">
-                <p className="font-mono text-[10px] tracking-[0.12em] text-[#6d786f] m-0">
+                <p className="font-mono text-[10px] tracking-[0.12em] text-[#7d887f] m-0">
                   {exp.category}
                 </p>
 
@@ -53,7 +53,7 @@ export default function Lab() {
                 </p>
 
                 <div className="mt-5">
-                  <p className="font-mono text-[9px] tracking-[0.14em] text-[#6d786f] m-0">
+                  <p className="font-mono text-[9px] tracking-[0.14em] text-[#7d887f] m-0">
                     {t.stackLabel}
                   </p>
                   <ul className="flex flex-wrap gap-2 mt-2.5 mb-0 p-0 list-none">

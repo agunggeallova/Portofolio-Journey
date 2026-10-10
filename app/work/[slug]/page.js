@@ -18,7 +18,14 @@ export async function generateMetadata({ params }) {
   return {
     title,
     description: study.tagline,
-    alternates: { canonical: `/work/${slug}` },
+    alternates: {
+      canonical: `/work/${slug}`,
+      languages: {
+        en: `/work/${slug}`,
+        id: `/id/work/${slug}`,
+        "x-default": `/work/${slug}`,
+      },
+    },
     // images omitted so the case study inherits the generated root card
     openGraph: {
       type: "article",

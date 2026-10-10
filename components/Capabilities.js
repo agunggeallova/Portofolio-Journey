@@ -60,7 +60,7 @@ export default function Capabilities() {
         </div>
 
         <div ref={toolsRef} className="reveal md:ml-[32%] mt-8">
-          <p className="font-mono text-[10px] tracking-[0.14em] text-[#6d786f] m-0">
+          <p className="font-mono text-[10px] tracking-[0.14em] text-[#7d887f] m-0">
             {t.toolsTitle}
           </p>
           <ul className="flex flex-wrap gap-2.5 mt-4 mb-0 p-0 list-none">

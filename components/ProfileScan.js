@@ -50,7 +50,7 @@ export default function ProfileScan() {
   useEffect(() => {
     let cancelled = false;
     const img = new Image();
-    img.src = "/bagas-ady-santoso.png";
+    img.src = "/bagas-ady-santoso.webp";
     img.onload = () => {
       if (cancelled) return;
       const cols = COLS;
@@ -172,7 +172,7 @@ export default function ProfileScan() {
 
         <div className="grid grid-cols-1 sm:grid-cols-[1.15fr_1fr]">
           <div className="border-b sm:border-b-0 sm:border-r border-line p-3">
-            <div className="font-mono text-[9px] tracking-wide text-[#5c665f] mb-2">VISUAL_MAP</div>
+            <div className="font-mono text-[9px] tracking-wide text-[#7d887f] mb-2">VISUAL_MAP</div>
             <div ref={boxRef} className="relative w-full aspect-square overflow-hidden">
               <pre
                 ref={preRef}
@@ -185,9 +185,13 @@ export default function ProfileScan() {
                 {ascii || "SCANNING..."}
               </pre>
 
-              {/* the real photo behind the readout, revealed only mid-glitch */}
+              {/* the real photo behind the readout, revealed only mid-glitch.
+                  Plain <img> on purpose: the crop is positioned with pixel
+                  offsets (PHOTO_FIT) that next/image's sizing model would
+                  fight, and this is a decorative 165KB asset, not an LCP one. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/bagas-ady-santoso.png"
+                src="/bagas-ady-santoso.webp"
                 alt=""
                 aria-hidden="true"
                 decoding="async"
@@ -200,11 +204,11 @@ export default function ProfileScan() {
           </div>
 
           <div className="p-4">
-            <div className="font-mono text-[9px] tracking-wide text-[#5c665f] mb-3">SYSTEM.INFO</div>
+            <div className="font-mono text-[9px] tracking-wide text-[#7d887f] mb-3">SYSTEM.INFO</div>
             <dl className="space-y-2.5">
               {INFO.map((item) => (
                 <div key={item.label} className="flex justify-between gap-3 font-mono text-[10px]">
-                  <dt className="text-[#6d786f] whitespace-nowrap">{item.label}</dt>
+                  <dt className="text-[#7d887f] whitespace-nowrap">{item.label}</dt>
                   <dd className="text-paper text-right m-0">{item.value}</dd>
                 </div>
               ))}

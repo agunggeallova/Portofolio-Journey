@@ -24,7 +24,7 @@ function ProjectCard({ project, contributionLabel }) {
       <p className="mt-4 text-[14px] leading-[1.75] text-[#a9b3ac] m-0">{project.description}</p>
 
       <div className="mt-5 pt-4 border-t border-line/70">
-        <p className="font-mono text-[9px] tracking-[0.14em] text-[#6d786f] m-0">
+        <p className="font-mono text-[9px] tracking-[0.14em] text-[#7d887f] m-0">
           {contributionLabel}
         </p>
         <p className="mt-2 text-[13px] leading-[1.7] text-[#87938a] m-0">{project.contribution}</p>

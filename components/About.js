@@ -103,7 +103,7 @@ export default function About() {
           ref={panelsRef}
           className="reveal grid grid-cols-1 md:grid-cols-[32%_1fr] gap-6 md:gap-0 mt-16 md:mt-20"
         >
-          <div className="font-mono text-[10px] tracking-[0.12em] text-[#6d786f] uppercase section-eyebrow">
+          <div className="font-mono text-[10px] tracking-[0.12em] text-[#7d887f] uppercase section-eyebrow">
             {t.pillarsTitle}
           </div>
 
@@ -125,7 +125,7 @@ export default function About() {
               })}
             </ul>
 
-            <p className="mt-8 mb-4 font-mono text-[10px] tracking-[0.12em] text-[#6d786f] uppercase">
+            <p className="mt-8 mb-4 font-mono text-[10px] tracking-[0.12em] text-[#7d887f] uppercase">
               {t.panelsHint}
             </p>
 

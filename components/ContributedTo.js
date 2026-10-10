@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useReveal } from "./useReveal";
 import { useLanguage } from "../lib/LanguageContext";
@@ -24,13 +25,12 @@ function LogoCell({ project }) {
         // the box sets the ceiling; the mark fills whichever axis runs out
         // first, so a wide wordmark and a compact glyph carry equal weight
         <span className="h-12 sm:h-14 w-full grid place-items-center">
-          <img
+          <Image
             src={project.logo}
             alt={`${project.name} logo`}
-            loading="lazy"
-            decoding="async"
             width={120}
             height={60}
+            sizes="(max-width: 640px) 50vw, 120px"
             onError={() => setFailed(true)}
             /*
               Rest state renders each mark as a flat white silhouette rather
